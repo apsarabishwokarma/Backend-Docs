@@ -1,3 +1,37 @@
+const userSchema = {
+  type: "object",
+  properties: {
+    id: {
+      type: "string",
+      example: "123",
+    },
+    name: {
+      type: "string",
+      example: "John Doe",
+    },
+    email: {
+      type: "string",
+      format: "email",
+      example: "john@gmail.com",
+    },
+  },
+};
+
+const createUserSchema = {
+  type: "object",
+  properties: {
+    name: {
+      type: "string",
+      example: "Jane Doe",
+    },
+    email: {
+      type: "string",
+      format: "email",
+      example: "jane@gmail.com",
+    },
+  },
+};
+
 const usersRoutesDocs = {
   "/users": {
     get: {
@@ -12,46 +46,17 @@ const usersRoutesDocs = {
             "application/json": {
               schema: {
                 type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    id: {
-                      type: "string",
-                      example: "123",
-                    },
-                    name: {
-                      type: "string",
-                      example: "John Doe",
-                    },
-                    email: {
-                      type: "string",
-                      format: "email",
-                      example: "john@gmail.com",
-                    },
-                  },
-                },
+                $ref: "#/components/schemas/User",
               },
             },
           },
         },
-        400: {
-          description: "Bad Request",
-        },
-        401: {
-          description: "Unauthorized",
-        },
-        403: {
-          description: "Forbidden",
-        },
-        404: {
-          description: "Users not found",
-        },
-        500: {
-          description: "Internal Server Error",
-        },
-        503: {
-          description: "Service Unavailable",
-        },
+        400: { description: "Bad Request" },
+        401: { description: "Unauthorized" },
+        403: { description: "Forbidden" },
+        404: { description: "Users not found" },
+        500: { description: "Internal Server Error" },
+        503: { description: "Service Unavailable" },
       },
     },
     post: {
@@ -63,20 +68,7 @@ const usersRoutesDocs = {
         required: true,
         content: {
           "application/json": {
-            schema: {
-              type: "object",
-              properties: {
-                name: {
-                  type: "string",
-                  example: "Jane Doe",
-                },
-                email: {
-                  type: "string",
-                  format: "email",
-                  example: "jane@gmail.com",
-                },
-              },
-            },
+            $ref: "#/components/schemas/CreateUser",
           },
         },
       },
@@ -84,21 +76,11 @@ const usersRoutesDocs = {
         200: {
           description: "User created successfully",
         },
-        400: {
-          description: "Bad Request",
-        },
-        401: {
-          description: "Unauthorized",
-        },
-        403: {
-          description: "Forbidden",
-        },
-        500: {
-          description: "Internal Server Error",
-        },
-        503: {
-          description: "Service Unavailable",
-        },
+        400: { description: "Bad Request" },
+        401: { description: "Unauthorized" },
+        403: { description: "Forbidden" },
+        500: { description: "Internal Server Error" },
+        503: { description: "Service Unavailable" },
       },
     },
   },
@@ -124,36 +106,18 @@ const usersRoutesDocs = {
           description: "User retrieved successfully",
           content: {
             "application/json": {
-              schema: {
-                type: "object",
-                properties: {
-                  id: {
-                    type: "string",
-                    example: "123",
-                  },
-                },
-              },
+              $ref: "#/components/schemas/User",
             },
           },
         },
-        400: {
-          description: "Bad Request",
-        },
-        401: {
-          description: "Unauthorized",
-        },
-        403: {
-          description: "Forbidden",
-        },
-        404: {
-          description: "User not found",
-        },
-        500: {
-          description: "Internal Server Error",
-        },
+        400: { description: "Bad Request" },
+        401: { description: "Unauthorized" },
+        403: { description: "Forbidden" },
+        404: { description: "User not found" },
+        500: { description: "Internal Server Error" },
       },
     },
   },
 };
 
-module.exports = usersRoutesDocs;
+module.exports = { usersRoutesDocs, userSchema, createUserSchema };
