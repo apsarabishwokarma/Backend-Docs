@@ -1,0 +1,35 @@
+{
+  "name": "backend-express",
+  "version": "1.0.0",
+  "description": "express js learning",
+  "keywords": [
+    "payment",
+    "security"
+  ],
+  "homepage": "https://github.com/apsarabishwokarma/backend-express.js#readme",
+  "bugs": {
+    "url": "https://github.com/apsarabishwokarma/backend-express.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apsarabishwokarma/backend-express.js.git"
+  },
+  "license": "ISC",
+  "author": "apsara",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
