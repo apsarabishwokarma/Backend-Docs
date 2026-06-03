@@ -1,8 +1,4 @@
-# Express.js Setup Guide for Beginners
-
-## What is Express.js?
-
-Express.js is a lightweight and popular web framework for Node.js that helps you build backend applications and APIs more easily.
+# Node js and Express.js Setup Guide for Beginners
 
 ### Without Express
 
@@ -29,16 +25,6 @@ app.get("/", (req, res) => {
 
 app.listen(3000);
 ```
-
-### Why Express?
-
-Express provides:
-
-- Easier routing
-- Middleware support
-- Better code organization
-- Faster API development
-- Large ecosystem and community support
 
 ---
 
@@ -505,31 +491,3 @@ Benefits:
 - Hide configuration values
 - Easily change environments
 - Store secrets safely
-
----
-
-# Learning Flow
-
-```text
-Node.js Basics
-      ↓
-Express Basics
-      ↓
-Routing
-      ↓
-Middleware
-      ↓
-REST APIs
-      ↓
-MVC Pattern
-      ↓
-MongoDB
-      ↓
-Authentication (JWT)
-      ↓
-Swagger
-      ↓
-Role-Based Access Control
-      ↓
-Production Backend Projects
-```

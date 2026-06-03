@@ -1,6 +1,6 @@
-# Swagger UI with Express.js - Complete Beginner Guide
+# Swagger UI with Express.js
 
-# What is Swagger?
+## What is Swagger?
 
 Swagger is a tool that automatically generates interactive API documentation for your backend.
 
