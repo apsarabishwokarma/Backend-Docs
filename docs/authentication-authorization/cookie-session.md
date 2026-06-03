@@ -1,0 +1,6 @@
+### Cookies and Sessions
+
+- **Cookies**: Small pieces of data stored on the client side by the browser, often used to store session identifiers or other information needed for authentication and maintaining user state across requests.
+- **Sessions**: A server-side storage mechanism that allows the server to store user-specific data across multiple requests. When a user logs in, the server creates a session and stores relevant information (e.g., user ID, authentication status) in the session. The client receives a session ID (often stored in a cookie) that is sent with each subsequent request to identify the session and authenticate the user.
+- **Session-Based Authentication**: A common authentication method where the server creates a session for each authenticated user and uses cookies to maintain the session state across requests. The server checks the session ID from the cookie on each request to verify the user's identity and permissions.
+- **Security Considerations**: When using cookies and sessions for authentication, it's important to implement security measures such as using secure cookies (HTTP-only and Secure flags), implementing session expiration, and protecting against session hijacking and cross-site request forgery (CSRF) attacks.

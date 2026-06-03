@@ -56,26 +56,6 @@ This is called **ES Modules (ESM)**.
 
 ---
 
-# Frontend vs Backend
-
-Frontend:
-
-```js
-import React from "react";
-import "./App.css";
-```
-
-Backend (ESM):
-
-```js
-import express from "express";
-import dotenv from "dotenv";
-```
-
-Very similar.
-
----
-
 # Why Do Many Express Tutorials Use require()?
 
 Because:
@@ -104,13 +84,13 @@ import express from "express";
 
 because:
 
-✅ Modern JavaScript standard
+- Modern JavaScript standard
 
-✅ Same syntax as frontend
+- Same syntax as frontend
 
-✅ Used in newer Node.js projects
+- Used in newer Node.js projects
 
-✅ Easier transition between frontend and backend
+- Easier transition between frontend and backend
 
 ---
 
@@ -245,3 +225,10 @@ Reading older code → CommonJS (require/module.exports)
 ```
 
 Learning both will make Express documentation and tutorials much easier to follow.
+
+### MVC Architecture in Backend Development
+
+- In backend we should use Model , view and controller to separate the code and make it more maintainable and scalable.
+- Model is responsible for handling the data and database operations.
+- View is responsible for rendering the user interface and displaying the data to the user.
+- Controller is responsible for handling the user input and interactions, and updating the model and view accordingly
