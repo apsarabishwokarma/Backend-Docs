@@ -11,6 +11,7 @@ const swaggerDocument = {
     version: "1.0.0",
     description: "API Docs",
   },
+
   paths: {
     ...usersRoutesDocs,
   },
