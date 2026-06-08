@@ -123,3 +123,24 @@ Role-Based Access Control
       ↓
 Production Backend Projects
 ```
+
+## Difference between app.use and app.get or app.post ?
+
+- `app.use` is used to apply middleware functions to all routes or specific routes. It can handle any HTTP method (GET, POST, etc.) and is typically used for tasks like logging, authentication, or parsing request bodies.
+- `app.get` is specifically used to define a route handler for GET requests. It is used to respond to client requests for specific endpoints with data or HTML content.
+- `app.post` is similar to `app.get`, but it is used for handling POST requests, which are typically used for submitting data to the server.
+- In summary, `app.use` is for middleware that applies to multiple routes, while `app.get` is for handling specific GET requests.
+- Example:
+
+```javascript
+// Using app.use for middleware
+app.use((req, res, next) => {
+  console.log("Request received");
+  next();
+});
+
+// Using app.get for a specific route
+app.get("/hello", (req, res) => {
+  res.send("Hello, World!");
+});
+```
