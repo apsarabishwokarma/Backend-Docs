@@ -203,3 +203,7 @@ app.get("/protected", authenticateToken, (req, res) => {
 | Transmission    | Sent with each request to the server                     | Not sent with every request; used to request a new access token when the current one expires      |
 | Security        | Short lifespan reduces risk of token theft and misuse    | Longer lifespan requires secure storage and token revocation mechanisms to mitigate risks         |
 | User Experience | May require re-authentication when access token expires  | Allows for seamless user experience by enabling token refresh without requiring re-authentication |
+
+### Why Jwt Token is Stateless?
+
+- JWT tokens are considered stateless because they do not require the server to maintain any session information about the user. The token itself contains all the necessary information (claims) about the user and their permissions, allowing the server to authenticate and authorize requests without needing to store any session data on the server side. This means that the server does not need to keep track of user sessions or store any information about the user between requests, making JWT tokens a stateless authentication mechanism.
