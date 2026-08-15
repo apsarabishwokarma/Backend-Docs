@@ -25,67 +25,7 @@ What Axios adds on top, that raw `fetch`/`https` don't give you for free:
 
 None of that is magic — it's all just more code wrapped around the same lower-level HTTP calls you're already making in `http-client.js`. That's exactly what this exercise is: a tiny, honest slice of what Axios actually does internally.
 
-Axios is a popular, promise-based JavaScript library used to make HTTP requests from both the browser and Node.js environments. It simplifies asynchronous communication with web servers and REST APIs, often serving as a cleaner alternative to JavaScript's built-in fetch API. [1] (https://www.youtube.com/watch?v=661GhwA3nYI&t=719), [2] (https://www.youtube.com/watch?v=ec-BR4RyzJs), [3] (https://www.geeksforgeeks.org/html/what-is-axios/), [4] (https://medium.com/free-code-camp/simple-http-requests-in-javascript-using-axios-272e1ac4a916)Key Benefits over fetchAutomatic JSON conversion: It automatically stringifies request bodies and parses JSON responses.Wide browser support: Works smoothly across older browsers without requiring polyfills.Interceptors: Allows you to intercept and modify requests or responses before they are handled.Built-in features: Supports request timeouts, request cancellation, and client-side protection against XSRF. [1] (https://medium.com/@MinimalGhost/what-is-axios-js-and-why-should-i-care-7eb72b111dc0), [2] (https://www.youtube.com/watch?v=ec-BR4RyzJs), [3] (https://medium.com/free-code-camp/simple-http-requests-in-javascript-using-axios-272e1ac4a916)1. InstallationYou can add Axios to your project using a package manager or an HTML script tag:bash# Using npm
-npm install axios
-
-# Using yarn
-
-yarn add axios
-Use code with caution.Or via CDN inside your HTML <head> or <body>:html<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-Use code with caution.2. Common HTTP Request ExamplesAxios provides convenient methods for all major HTTP verbs. You can handle them using modern async/await syntax or standard .then()/.catch() promises. [1] (https://dev.to/edriso/axios-a-simple-practical-guide-with-examples-2eo8), [2] (https://www.youtube.com/watch?v=KPGn2vlBheA&t=4), [3] (https://www.youtube.com/watch?v=ec-BR4RyzJs)GET Request (Fetching Data)javascriptimport axios from 'axios'; // Not needed if using CDN
-
-async function getUser() {
-try {
-// Axios automatically parses the response into JSON
-const response = await axios.get('https://typicode.com');
-
-    // The actual server response data is located in response.data
-    console.log(response.data);
-    console.log(response.status); // e.g., 200
-
-} catch (error) {
-console.error('Error fetching data:', error.message);
-}
-}
-
-getUser();
-Use code with caution.POST Request (Sending Data)javascriptasync function createUser() {
-const newUser = {
-name: 'John Doe',
-email: 'john@example.com'
-};
-
-try {
-// Pass the payload object directly as the second argument
-const response = await axios.post('https://typicode.com', newUser);
-console.log('User created:', response.data);
-} catch (error) {
-console.error('Error creating user:', error);
-}
-}
-
-createUser();
-Use code with caution.PUT and DELETE Requestsjavascript// PUT: Updating a resource
-axios.put('https://typicode.com', { name: 'Jane Doe' })
-.then(res => console.log(res.data));
-
-// DELETE: Removing a resource
-axios.delete('https://typicode.com')
-.then(res => console.log('Deleted successfully'));
-Use code with caution.3. Custom ConfigurationsYou can also pass a detailed configuration object to axios() instead of using the shorthand methods:javascriptaxios({
-method: 'post',
-url: '/user/12345',
-baseURL: 'https://example.com',
-timeout: 5000, // Aborts request if it takes longer than 5 seconds
-headers: { 'X-Requested-With': 'XMLHttpRequest' },
-params: {
-ID: 12345 // Appends ?ID=12345 to the URL
-},
-data: {
-firstName: 'Fred' // Request body
-}
-});
-Use code with caution.If you want to dive deeper, let me know:Are you setting this up for a frontend framework (like React or Vue) or a Node.js backend?Would you like to see how to implement Interceptors for tasks like adding authorization tokens automatically?
+Axios is a popular, promise-based JavaScript library used to make HTTP requests from both the browser and Node.js environments. It simplifies asynchronous communication with web servers and REST APIs, often serving as a cleaner alternative to JavaScript's built-in fetch API.
 
 ## 3. The four ways to make an HTTP request in JS
 
