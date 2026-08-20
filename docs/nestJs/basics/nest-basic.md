@@ -1,6 +1,8 @@
 ### What is NestJS?
 
-NestJS is a Node.js framework for building backend APIs — like Express, but way more structured — for creating efficient, scalable server-side applications. It uses progressive JavaScript, is built with and fully supports TypeScript (while still allowing pure JavaScript),and combines elements of OOP (Object Oriented Programming), FP (Functional Programming), and FRP (Functional Reactive Programming).
+NestJS is a Node.js framework for building backend APIs like Express, but way more structured useful for creating efficient, scalable server-side applications.
+
+- It uses progressive JavaScript, is built with and fully supports TypeScript (while still allowing pure JavaScript),and combines elements of OOP (Object Oriented Programming), FP (Functional Programming), and FRP (Functional Reactive Programming).
 
 Think of it as "Express + Angular's architecture philosophy" — it gives us:
 
@@ -8,6 +10,25 @@ Think of it as "Express + Angular's architecture philosophy" — it gives us:
 - Modular architecture — your app is split into Modules, Controllers, and Services (also called "providers")
 - Dependency Injection (DI) — built-in, so your code stays testable and decoupled
 - Decorators — @Controller(), @Injectable(), @Get() etc. define behavior declaratively
+
+### Summary
+
+- **NestJS** is a framework for building **Node.js backend applications**.
+- It mainly uses **TypeScript**, but you can also use JavaScript.
+- **Node.js** must be installed first.
+- NestJS currently requires a recent Node.js version (the latest active LTS is recommended).
+
+#### Main idea
+
+Think of NestJS like this:
+
+**NestJS = Node.js + TypeScript + organized structure for building backends**
+
+And the basic flow is:
+
+**Request → Controller → Service → Response**
+
+## Why Nest Js ? Comparison between Nest and Express.
 
 ## Setup
 
@@ -898,3 +919,900 @@ Database
 That makes the application easier to **test, maintain, and change**.
 
 **In one sentence:** the diagram shows how NestJS lets you break an HTTP request into specialized pieces, where each piece has **one main responsibility**.
+
+---
+
+Automatically Setting up Project
+
+## NestJs CLI
+
+### What is Nest CLI?
+
+**Nest CLI = Nest Command Line Interface.**
+
+It is a tool that helps us to **create, generate, run, and manage NestJS projects** from your terminal.
+
+Think of it as a **helper tool (like a toolbox) for NestJS**.
+
+```text
+Nest CLI
+   ↓
+Create project
+   ↓
+Generate controller/service/module
+   ↓
+Build project
+   ↓
+Run project
+```
+
+As a frontend developer, you can think of it somewhat like **Angular CLI**: it generates the standard structure and files so you don't have to do everything manually
+
+### 1. Install Nest CLI
+
+```bash
+npm i -g @nestjs/cli
+```
+
+`-g` means you install it **globally**, so you can use the `nest` command anywhere.
+
+---
+
+### 2. Create a new Nest project
+
+```bash
+nest new my-project
+```
+
+This automatically creates the basic project structure.
+
+It creates things like:
+
+```text
+my-project/
+├── src/
+│   ├── app.controller.ts
+│   ├── app.service.ts
+│   ├── app.module.ts
+│   └── main.ts
+├── package.json
+├── tsconfig.json
+└── ...
+```
+
+### Important Files
+
+Inside `src/`:
+
+- `main.ts` → **Starts the application**
+- `app.module.ts` → **Main/root module**
+- `app.controller.ts` → Handles **HTTP requests/routes**
+- `app.service.ts` → Contains **business logic**
+- `app.controller.spec.ts` → **Tests** for the controller
+  Instead of manually creating folders and configuration files, Nest CLI does it for you.
+
+---
+
+### 3. Generate files
+
+This is one of the **most useful features** of Nest CLI.
+
+For example:
+
+```bash
+nest generate controller users
+```
+
+or shorter:
+
+```bash
+nest g controller users
+```
+
+It creates a controller for you.
+
+Similarly:
+
+```bash
+nest g service users
+nest g module users
+```
+
+You can generate many Nest building blocks without manually creating files.
+
+---
+
+### 4. Run your application
+
+You normally use npm scripts:
+
+Normal start:
+
+```bash
+npm run start
+```
+
+Development mode (automatically reloads when you change code):
+
+```bash
+npm run start:dev
+```
+
+Then visit:
+
+```text
+http://localhost:3000
+```
+
+---
+
+### 5. Check available commands
+
+```bash
+nest --help
+```
+
+You'll see commands such as:
+
+```text
+nest new
+nest generate
+nest build
+nest start
+nest info
+```
+
+### HTTP Platform
+
+NestJS can work with:
+
+- **Express** → default, popular and stable
+- **Fastify** → focused on high performance
+
+### Code Quality
+
+NestJS projects come with:
+
+- **Oxlint** → finds code problems
+- **Prettier** → formats your code
+
+Commands:
+
+```bash
+npm run lint
+npm run format
+```
+
+### Nest Js Basic code example
+
+```js
+import { Controller, Module, Get } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+
+@Controller()
+class AppController {
+  @Get()
+  getRootRoute() {
+    return "hi there!";
+  }
+}
+
+@Module({
+  controllers: [AppController],
+})
+class AppModule {}
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  await app.listen(3000);
+}
+
+bootstrap();
+```
+
+### code explanation:
+
+This is basically the **smallest NestJS app** you can make.Now let's break it down from the very beginning.
+
+## 1. Imports
+
+```ts
+import { Controller, Module, Get } from "@nestjs/common";
+```
+
+This imports some tools from NestJS.
+
+- `Controller` → tells Nest that a class handles HTTP requests
+- `Get` → tells Nest that a method handles a `GET` request
+- `Module` → groups parts of your application together
+
+Think of them as NestJS features you are bringing into your file.
+
+Then:
+
+```ts
+import { NestFactory } from "@nestjs/core";
+```
+
+`NestFactory` is used to actually **create the NestJS application**.
+
+You can think:
+
+```text
+NestFactory = machine that starts NestJS
+```
+
+---
+
+# 2. `@Controller()`
+
+```ts
+@Controller()
+class AppController {
+```
+
+Without:
+
+```ts
+@Controller()
+```
+
+this is just a normal JavaScript class:
+
+```ts
+class AppController {}
+```
+
+Nest wouldn't know what it is for.
+
+But:
+
+```ts
+@Controller()
+```
+
+tells Nest:
+
+> This class is a controller. It can receive HTTP requests.
+
+So:
+
+```text
+@Controller()
+     ↓
+AppController
+     ↓
+handles HTTP requests
+```
+
+---
+
+# 3. What is a controller?
+
+A controller is basically a place where you define your API routes.
+
+Example:
+
+```ts
+@Controller()
+class AppController {}
+```
+
+Inside it, you can define things like:
+
+```text
+GET /
+GET /users
+POST /users
+DELETE /users/123
+```
+
+Your controller is like the **front door of your backend**.
+
+Requests arrive there.
+
+---
+
+# 4. `@Get()`
+
+Inside the controller:
+
+```ts
+@Get()
+getRootRoute() {
+  return 'hi there!';
+}
+```
+
+`@Get()` means:
+
+> Run this method when someone sends a GET request.
+
+Because you didn't give it any path:
+
+```ts
+@Get()
+```
+
+it means the root path:
+
+```text
+/
+```
+
+So this:
+
+```ts
+@Get()
+getRootRoute() {
+  return 'hi there!';
+}
+```
+
+creates:
+
+```http
+GET /
+```
+
+---
+
+# 5. What is `getRootRoute()`?
+
+This:
+
+```ts
+getRootRoute() {
+  return 'hi there!';
+}
+```
+
+is just a normal class method.
+
+The method name:
+
+```ts
+getRootRoute;
+```
+
+doesn't matter to Nest.
+
+You could write:
+
+```ts
+@Get()
+banana() {
+  return 'hi there!';
+}
+```
+
+and it would still handle:
+
+```http
+GET /
+```
+
+because Nest cares about:
+
+```ts
+@Get()
+```
+
+not the function name.
+
+---
+
+# 6. What does `return 'hi there!'` do?
+
+```ts
+return "hi there!";
+```
+
+Nest takes whatever you return and sends it back to the client.
+
+So if the browser sends:
+
+```http
+GET /
+```
+
+Nest responds:
+
+```text
+hi there!
+```
+
+Flow:
+
+```text
+Browser
+   ↓
+GET /
+   ↓
+@Get()
+   ↓
+getRootRoute()
+   ↓
+return 'hi there!'
+   ↓
+Browser receives:
+hi there!
+```
+
+---
+
+# 7. The module
+
+Now this part:
+
+```ts
+@Module({
+  controllers: [AppController],
+})
+class AppModule {}
+```
+
+A NestJS module is basically a **container/group**.
+
+It tells Nest:
+
+> These things belong to this part of the application.
+
+Here you're saying:
+
+```ts
+controllers: [AppController];
+```
+
+meaning:
+
+> AppModule contains AppController.
+
+Visualize it:
+
+```text
+AppModule
+   │
+   └── AppController
+          │
+          └── GET /
+```
+
+Without registering `AppController` inside the module, Nest doesn't know that it should use it.
+
+---
+
+# 8. Why is it `controllers` plural?
+
+This is important.
+
+Correct:
+
+```ts
+@Module({
+  controllers: [AppController],
+})
+```
+
+Not:
+
+```ts
+controller: [AppController];
+```
+
+because a module can have many controllers:
+
+```ts
+@Module({
+  controllers: [
+    AppController,
+    UsersController,
+    AuthController,
+    ProductsController,
+  ],
+})
+```
+
+So Nest uses an array.
+
+---
+
+# 9. `class AppModule {}`
+
+```ts
+class AppModule {}
+```
+
+Looks empty, right?
+
+That's because most of the important information is here:
+
+```ts
+@Module({
+  controllers: [AppController],
+})
+```
+
+The decorator gives Nest the metadata it needs.
+
+So although the class looks empty:
+
+```ts
+class AppModule {}
+```
+
+Nest knows:
+
+```text
+AppModule
+contains
+AppController
+```
+
+because of the `@Module()` decorator.
+
+---
+
+# 10. `bootstrap()`
+
+Now:
+
+```ts
+async function bootstrap() {
+```
+
+This is just a function that starts your application.
+
+`bootstrap` isn't a special JavaScript keyword.
+
+You could technically call it:
+
+```ts
+async function startApp() {}
+```
+
+But `bootstrap` is the common convention.
+
+In programming, **bootstrap means starting and initializing the application**.
+
+For your Nest app, the bootstrap process is basically:
+
+```text
+Start program
+   ↓
+Create NestJS app
+   ↓
+Load AppModule
+   ↓
+Find controllers/providers
+   ↓
+Register routes
+   ↓
+Start HTTP server
+   ↓
+Listen on port 3000
+```
+
+# 11. Creating the Nest application
+
+```ts
+const app = await NestFactory.create(AppModule);
+```
+
+This is one of the most important lines.
+
+You're telling Nest:
+
+> Create my application starting from `AppModule`.
+
+Nest looks at:
+
+```ts
+AppModule;
+```
+
+Then sees:
+
+```ts
+@Module({
+  controllers: [AppController],
+})
+```
+
+Then discovers:
+
+```text
+AppController
+```
+
+Then sees:
+
+```ts
+@Get()
+```
+
+And registers:
+
+```text
+GET /
+```
+
+So this:
+
+```ts
+NestFactory.create(AppModule);
+```
+
+causes Nest to build the application structure.
+
+---
+
+# 12. Dependency graph starts from `AppModule`
+
+You can think of `AppModule` as the root.
+
+```text
+NestFactory.create(AppModule)
+              │
+              ▼
+          AppModule
+              │
+              ▼
+       AppController
+              │
+              ▼
+           GET /
+```
+
+In a larger app:
+
+```text
+AppModule
+├── UsersModule
+│   ├── UsersController
+│   └── UsersService
+│
+├── AuthModule
+│   ├── AuthController
+│   └── AuthService
+│
+└── ProductsModule
+    ├── ProductsController
+    └── ProductsService
+```
+
+But your example only has one controller.
+
+---
+
+# 13. Why `await`?
+
+```ts
+const app = await NestFactory.create(AppModule);
+```
+
+Creating the application can involve asynchronous work.
+
+So:
+
+```ts
+await;
+```
+
+means:
+
+> Wait until Nest has finished creating the application before continuing.
+
+Conceptually:
+
+```text
+create application
+      ↓
+wait...
+      ↓
+finished
+      ↓
+continue
+```
+
+---
+
+# 14. `app.listen(3000)`
+
+Then:
+
+```ts
+await app.listen(3000);
+```
+
+This tells your server:
+
+> Listen for HTTP requests on port 3000.
+
+So your application becomes available at:
+
+```text
+http://localhost:3000
+```
+
+If you visit:
+
+```text
+http://localhost:3000/
+```
+
+the browser sends:
+
+```http
+GET /
+```
+
+Nest finds:
+
+```ts
+@Get()
+```
+
+and executes:
+
+```ts
+getRootRoute();
+```
+
+which returns:
+
+```text
+hi there!
+```
+
+---
+
+# 15. What does "listen" mean?
+
+Think of the server as waiting by a phone.
+
+```ts
+app.listen(3000);
+```
+
+means:
+
+```text
+Server:
+"I'm listening on port 3000.
+If any request comes here, I'll handle it."
+```
+
+So:
+
+```text
+localhost:3000
+          ↑
+        port
+```
+
+Ports let multiple applications run on one computer.
+
+For example:
+
+```text
+localhost:3000 → NestJS
+localhost:5432 → PostgreSQL
+localhost:5173 → React/Vite
+```
+
+---
+
+# 16. Finally `bootstrap()`
+
+At the bottom:
+
+```ts
+bootstrap();
+```
+
+This actually calls the function.
+
+Without this:
+
+```ts
+bootstrap();
+```
+
+you only define:
+
+```ts
+async function bootstrap() {}
+```
+
+but never run it.
+
+Example:
+
+```ts
+function hello() {
+  console.log("hello");
+}
+```
+
+This does nothing until:
+
+```ts
+hello();
+```
+
+Same thing here.
+
+---
+
+# Entire execution flow
+
+When Node runs this file:
+
+```text
+1. Import NestJS tools
+        ↓
+2. Define AppController
+        ↓
+3. Decorators describe its routes
+        ↓
+4. Define AppModule
+        ↓
+5. Register AppController in AppModule
+        ↓
+6. Define bootstrap()
+        ↓
+7. Call bootstrap()
+        ↓
+8. NestFactory.create(AppModule)
+        ↓
+9. Nest builds the application
+        ↓
+10. app.listen(3000)
+        ↓
+11. Server waits for requests
+```
+
+Then you open:
+
+```text
+http://localhost:3000
+```
+
+Flow becomes:
+
+```text
+Browser
+   │
+   │ GET /
+   ▼
+localhost:3000
+   │
+   ▼
+NestJS
+   │
+   │ finds matching route
+   ▼
+AppController
+   │
+   ▼
+@Get()
+   │
+   ▼
+getRootRoute()
+   │
+   ▼
+return "hi there!"
+   │
+   ▼
+NestJS
+   │
+   ▼
+HTTP response
+   │
+   ▼
+Browser
+
+hi there!
+```
