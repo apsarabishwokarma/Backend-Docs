@@ -1816,3 +1816,117 @@ Browser
 
 hi there!
 ```
+
+## File Name convention
+
+### Simple summary
+
+- `main.ts` → starts the NestJS app
+- `app.module.ts` → root module that connects app parts
+- `app.controller.ts` → handles HTTP routes
+
+### File naming convention
+
+```text
+name.type.ts
+```
+
+Examples:
+
+```text
+app.controller.ts
+app.module.ts
+users.service.ts
+users.controller.ts
+```
+
+### Class naming convention
+
+```ts
+AppController;
+AppModule;
+UsersService;
+UsersController;
+```
+
+So:
+
+```text
+app.controller.ts  → AppController
+app.module.ts      → AppModule
+users.service.ts   → UsersService
+```
+
+### Main rules
+
+- Usually one main class per file
+- File name should match the class purpose
+- Class name should include what it is: `Controller`, `Service`, `Module`
+- Filenames use lowercase with dots
+- Classes use PascalCase
+- `main.ts` is the special startup file with `bootstrap()`
+
+### split that exact code into these 3 files:
+
+### `app.controller.ts`
+
+```ts
+import { Controller, Get } from "@nestjs/common";
+
+@Controller()
+export class AppController {
+  @Get()
+  getRootRoute() {
+    return "hi there!";
+  }
+}
+```
+
+### `app.module.ts`
+
+```ts
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+
+@Module({
+  controllers: [AppController],
+})
+export class AppModule {}
+```
+
+### `main.ts`
+
+```ts
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  await app.listen(3000);
+}
+
+bootstrap();
+```
+
+### Simple flow
+
+```text
+main.ts
+  ↓
+AppModule
+  ↓
+AppController
+  ↓
+@Get()
+  ↓
+GET /
+  ↓
+"hi there!"
+```
+
+So:
+
+- `main.ts` → starts the app
+- `app.module.ts` → registers the controller
+- `app.controller.ts` → handles the request
