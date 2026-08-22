@@ -337,3 +337,129 @@ So remember:
 @Module()     → this is a module
 @Injectable() → Nest can inject/manage this class
 ```
+
+## Decorator Routing
+
+routing itself simply means: deciding where an incoming request should go.
+
+- Decorator routing = defining routes by attaching route information to classes and methods using decorators.
+
+- Decorator-based routing means using decorators to tell NestJS which URL + HTTP method should execute which controller method.
+
+```ts
+@Controller("/app")
+export class AppController {
+  @Get("/asdf")
+  getRootRoute() {
+    return "hi there!";
+  }
+}
+```
+
+That is called **routing** in NestJS.
+
+More specifically:
+
+```ts
+@Controller("/app")
+```
+
+is a **controller route prefix**.
+
+```ts
+@Get("/asdf")
+```
+
+is a **route handler decorator**.
+
+Together they define this route:
+
+```text
+GET /app/asdf
+```
+
+So the overall thing is called:
+
+> **NestJS routing using decorators**.
+
+This means:
+
+- `@Controller("/app")`
+  - sets the base route to:
+
+```text
+/app
+```
+
+- `@Get("/asdf")`
+  - adds another route part:
+
+```text
+/asdf
+```
+
+Nest combines them:
+
+```text
+/app + /asdf
+```
+
+So the final route is:
+
+```http
+GET /app/asdf
+```
+
+When someone visits:
+
+```text
+http://localhost:3000/app/asdf
+```
+
+Nest runs:
+
+```ts
+getRootRoute();
+```
+
+and returns:
+
+```text
+hi there!
+```
+
+Simple flow:
+
+```text
+GET /app/asdf
+      ↓
+@Controller("/app")
+      +
+@Get("/asdf")
+      ↓
+getRootRoute()
+      ↓
+"hi there!"
+```
+
+So the key idea is:
+
+```text
+Controller path + method decorator path = final route
+```
+
+Example:
+
+```ts
+@Controller("/users")
+export class UsersController {
+  @Get("/profile")
+  getProfile() {}
+}
+```
+
+Final route:
+
+```http
+GET /users/profile
+```
