@@ -358,7 +358,12 @@ export class AppController {
 
 That is called **routing** in NestJS.
 
-More specifically:
+1. **Routing** — The process of directing an incoming HTTP request to the appropriate controller method based on its URL and HTTP method.
+
+2. **Decorator-based routing** — A routing approach where decorators such as `@Controller()`, `@Get()`, and `@Post()` define how requests are mapped to specific handlers.
+
+3. **Route handler** — A controller method that is executed when an incoming request matches its configured HTTP method and route path.
+   More specifically:
 
 ```ts
 @Controller("/app")
